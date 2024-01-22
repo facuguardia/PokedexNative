@@ -1,17 +1,17 @@
 import React from 'react';
 import {ActivityIndicator, Image, View} from 'react-native';
-
-import {styles} from '../theme/StyleGlobal';
-import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
 import {FlatList} from 'react-native-gesture-handler';
+
+import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
+import {FloatingButtonSearch} from '../components/FloatingButtonSearch';
 import {PokemonCard} from '../components/PokemonCard';
+import {styles} from '../theme/StyleGlobal';
 
 export const HomeScreen = () => {
   const {simplePokemonList, loadPokemons} = usePokemonPaginated();
 
   return (
     <View style={{...styles.marginGlobal, alignItems: 'center'}}>
-
       {/* Background */}
       <Image
         source={require('../assets/pokebola.png')}
@@ -35,6 +35,11 @@ export const HomeScreen = () => {
             <ActivityIndicator size={20} color="grey" style={{height: 100}} />
           }
         />
+      </View>
+
+      {/* Button Search */}
+      <View style={{width: '100%'}}>
+        <FloatingButtonSearch />
       </View>
     </View>
   );

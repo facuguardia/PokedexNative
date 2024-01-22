@@ -8,12 +8,15 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
-
 import {RootStackParams} from '../navigation/Navigation';
+
 import Icon from 'react-native-vector-icons/Ionicons';
-import {FadeInImage} from '../components/FadeInImage';
+
 import {usePokemon} from '../hooks/usePokemon';
+
+import {FadeInImage} from '../components/FadeInImage';
 import {PokemonDetails} from '../components/PokemonDetails';
+
 
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> {}
 

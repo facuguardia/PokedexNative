@@ -8,6 +8,7 @@ import {
   StyleProp,
   View,
 } from 'react-native';
+
 import {useAnimation} from '../hooks/useAnimation';
 
 interface Props {
