@@ -1,18 +1,41 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
-import {StackScreenProps} from '@react-navigation/stack';
+import {ActivityIndicator, Image, View} from 'react-native';
 
-interface Props extends StackScreenProps<any, any> {}
+import {styles} from '../theme/StyleGlobal';
+import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
+import {FlatList} from 'react-native-gesture-handler';
+import {PokemonCard} from '../components/PokemonCard';
 
+export const HomeScreen = () => {
+  const {simplePokemonList, loadPokemons} = usePokemonPaginated();
 
-export const HomeScreen = ({navigation}: Props) => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
-      <Button
-        title="ir al detalle"
-        onPress={() => navigation.navigate('PokemonScreen')}
+    <View style={{...styles.marginGlobal, alignItems: 'center'}}>
+
+      {/* Background */}
+      <Image
+        source={require('../assets/pokebola.png')}
+        style={styles.pokebolaBG}
       />
+
+      {/* Cards */}
+      <View>
+        <FlatList
+          data={simplePokemonList}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          keyExtractor={pokemon => pokemon.id}
+          // Render Item
+          renderItem={({item}) => <PokemonCard pokemon={item} />}
+          // Infinite Scroll
+          onEndReached={loadPokemons}
+          onEndReachedThreshold={0.4}
+          // Activiti Indicator
+          ListFooterComponent={
+            <ActivityIndicator size={20} color="grey" style={{height: 100}} />
+          }
+        />
+      </View>
     </View>
   );
 };
