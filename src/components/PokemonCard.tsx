@@ -40,7 +40,7 @@ export const PokemonCard = ({pokemon}: Props) => {
       }>
       <View style={{...styles.container, backgroundColor: bgColor}}>
         <Text style={styles.name}>
-          {pokemon.name} {'\n#' + pokemon.id}
+          {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} {'\n#' + pokemon.id}
         </Text>
       </View>
 
