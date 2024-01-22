@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, ActivityIndicator, FlatList} from 'react-native';
 
-import {SearchInput} from '../components/SearchInput';
 import {usePokemonSearch} from '../hooks/usePokemonSearch';
-import {PokemonCard} from '../components/PokemonCard';
 import {SimplePokemon} from '../interfaces/pokemonInterfaces';
+import {SearchInput} from '../components/SearchInput';
+import {PokemonCard} from '../components/PokemonCard';
+import {Loading} from '../components/Loading';
 
 export const SearchScreen = () => {
   const {isFetching, simplePokemonList} = usePokemonSearch();
@@ -16,7 +17,7 @@ export const SearchScreen = () => {
       return setPokemonFiltered([]);
     }
 
-    if( Number(term) ) {
+    if (Number(term)) {
       const pokemonById = simplePokemonList.find(poke => poke.id === term);
       return setPokemonFiltered(pokemonById ? [pokemonById] : []);
     }
@@ -28,11 +29,7 @@ export const SearchScreen = () => {
   }, [term]);
 
   if (isFetching) {
-    return (
-      <View style={styles.activityContainer}>
-        <ActivityIndicator color="grey" size={50} />
-      </View>
-    );
+    return <Loading />;
   }
 
   return (
@@ -53,11 +50,6 @@ export const SearchScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  activityContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   container: {
     flex: 1,
   },

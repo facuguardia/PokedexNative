@@ -16,10 +16,6 @@ export const SearchInput = ({ onDebounce }: Props) => {
     onDebounce(debouncedValue);
   }, [debouncedValue]);
 
-  const handleScroll = () => {
-    Keyboard.dismiss();
-  };
-
   return (
     <View style={styles.inputContainer}>
       {/* Search */}
@@ -31,7 +27,8 @@ export const SearchInput = ({ onDebounce }: Props) => {
         autoCorrect={false}
         value={textValue}
         onChangeText={setTextValue}
-        onScroll={handleScroll}
+        placeholderTextColor={'grey'}
+        onSubmitEditing={Keyboard.dismiss}
       />
       <Icon name="search-outline" size={30} color="grey" />
     </View>
