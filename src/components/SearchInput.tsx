@@ -1,17 +1,37 @@
-import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
-import  Icon  from 'react-native-vector-icons/Ionicons';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, TextInput, View, Keyboard } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-export const SearchInput = () => {
+import { useDebouncedValue } from '../hooks/useDebouncedValue';
+
+interface Props {
+  onDebounce: (value: string) => void;
+}
+
+export const SearchInput = ({ onDebounce }: Props) => {
+  const [textValue, setTextValue] = useState('');
+  const debouncedValue = useDebouncedValue(textValue);
+
+  useEffect(() => {
+    onDebounce(debouncedValue);
+  }, [debouncedValue]);
+
+  const handleScroll = () => {
+    Keyboard.dismiss();
+  };
+
   return (
     <View style={styles.inputContainer}>
-      {/* Seacrh */}
+      {/* Search */}
       <TextInput
         style={styles.input}
         placeholder="Search Pokemon"
         keyboardType="default"
         autoCapitalize="none"
         autoCorrect={false}
+        value={textValue}
+        onChangeText={setTextValue}
+        onScroll={handleScroll}
       />
       <Icon name="search-outline" size={30} color="grey" />
     </View>
@@ -20,7 +40,7 @@ export const SearchInput = () => {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderRadius: 50,
     elevation: 10,
     marginTop: 20,

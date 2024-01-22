@@ -1,6 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, Image, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import {ActivityIndicator, Image, View, FlatList} from 'react-native';
 
 import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
 import {FloatingButtonSearch} from '../components/FloatingButtonSearch';
